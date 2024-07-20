@@ -1,4 +1,14 @@
 {
   "name": "pomodoront",
-  "displayName": "pomodoront"
+  "displayName": "pomodoront",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "6fe63c55-fbc8-482e-bad8-cef58bc4dbfd"
+      }
+    }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-8412527947101695~7251095903"
+  }
 }
