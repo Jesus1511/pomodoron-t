@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions, Image } from 'react-native';
+import { useState, useEffect, useContext } from 'react';
+import { StyleSheet, ScrollView, View, Dimensions, Image, Text } from 'react-native';
 import { Clock } from './clock/Clock.jsx';
 import { Saved } from './saved/Saved.jsx';
 import { Options } from './configuracion/Options.jsx';
@@ -7,16 +7,20 @@ import { LinearGradient } from 'expo-linear-gradient';
 import clara from '../assets/sobraclara.png';
 import { StartSesion } from './clock/StartSesion.jsx';
 import { SesionDetails } from './saved/SesionDetails.jsx';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Banner from './Banner.jsx'
+
 
 const { width } = Dimensions.get("window");
 
 export const AnimatedRoutes = () => {
   const [scrollEnabled, setScrollEnabled] = useState(true);
-
   const [startingSesion, setStartingSesion] = useState(false);
   const [ sesionDetails, setSesionDetails ] = useState(null);
+  const [ tokens, setTokens ] = useState(0)
 
   useEffect(() => {
+    setiandingTokens()
     if (startingSesion || sesionDetails !== null) {
       setScrollEnabled(false)
     } else {
@@ -24,11 +28,22 @@ export const AnimatedRoutes = () => {
     }
   },[startingSesion, sesionDetails])
 
+  async function setiandingTokens () {
+    const storedTokens = await AsyncStorage.getItem('tokens')
+    setTokens(parseInt(storedTokens))
+  }
+
   return (
     <>
     <View style={{ flex: 1, backgroundColor: "#1a2432" }}>
       <Image source={clara} style={[styles.shadow, { top: 0, height: 400 }]} />
+
+      <View style={{}}>
+        <Text style={{textAlign:"center", width, position:"absolute", top:38}}>Tokens: {tokens}</Text>
+      </View>
+
       <Options />
+
       <ScrollView
         style={styles.scrollView}
         horizontal
@@ -46,6 +61,7 @@ export const AnimatedRoutes = () => {
         <Clock setIsOpen={setStartingSesion} />
         <Saved setIsOpen={setSesionDetails} saved={false}/>
       </ScrollView>
+      <Banner />
     </View>
     
     {startingSesion && (<StartSesion setOpenSesionDetails={setStartingSesion}/>)}

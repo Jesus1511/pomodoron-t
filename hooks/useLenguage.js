@@ -10,9 +10,9 @@ const translations = {
       "All you need to do is define the number of hours you want to work and the total rest budget you will have, start the timer, and begin working. When you feel fatigued or blocked, you can start your break time to recover"
     ],
     menu: ["language", "Get Tokens", "Leave Feedback", "App Guide", "Loading Add", "Watch Add"],
-    timer: ["working time", "resting time","","", "Sesion Hours", "rest budgeting hours", "start"],
+    timer: ["working time", "resting time","","", "Sesion Hours", "rest budgeting hours", "start", "get more tokens in the configuration for more sessions"],
     saveds: ["Today", "Yesterday", "More Sessions", "Started at", "Ended at", "There's still no any session"],
-    noti: ["Congratulations!! 🎉🎉", "Have Completed the Work Session.","The Resting Time is Over" ,"your working time is running out, don't let it slip away."]
+    noti: ["Congratulations!! 🎉🎉", "Have Completed the Work Session.","The Resting Time is Over" ,"your working time is running out, don't let it slip away.", "Stop Alarm"]
   },
   es: {
     slides: [
@@ -21,9 +21,9 @@ const translations = {
       "Todo lo que debes hacer es definir la cantidad de horas que deseas trabajar y el presupuesto de descanso total que tendrás, iniciar el temporizador y empezar a trabajar. En el momento que te sientas fatigado o bloqueado, puedes poner a correr tu tiempo de descanso para recuperarte"
     ],
     menu: ["lenguaje", "Obten Tokens", "Valoranos", "Guia de la App", "Cargando Anuncio", "Ver Anuncio"],
-    timer: ["working time", "resting time","","", "Horas de la sesion", "Horas de descanso", "iniciar"],
+    timer: ["working time", "resting time","","", "Horas de la sesion", "Horas de descanso", "iniciar", "obten más tokens en la configuración para más sesiones"],
     saveds: ["Hoy", "Ayer", "Ver más", "Inicio en", "Termino en", "Todavia no hay ninguna sesión"],
-    noti: ["Felicidades!! 🎉🎉","Completaste la Sesion de Trabajo.","Se ah Acabado el Descanso" ,"tu tiempo productivo esta corriendo, no dejes que se te escape."]
+    noti: ["Felicidades!! 🎉🎉","Completaste la Sesion de Trabajo.","Se ah Acabado el Descanso" ,"tu tiempo productivo esta corriendo, no dejes que se te escape.", "Detener"]
   }
 };
 

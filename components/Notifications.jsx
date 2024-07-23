@@ -5,21 +5,19 @@ import { getTranslation } from '../hooks/useLenguage';
 
 export const Notificationss = ({ children }) => {
 
- useEffect(() => {
- //   PushNotification.createChannel(
- //     {
- //       channelId: "carnitaAsada",
- //       channelName: "carnitaAsada",
- //       channelDescription: "A channel to categorise your notifications",
- //       playSound: true,
- //       soundName: "endsesion", 
- //       importance: PushNotification.Importance.HIGH,
- //       vibrate: true,
- //     },
- //     (created) => console.log(`createChannel returned '${created}'`) 
- //   );
+  useEffect(() => {
+    PushNotification.createChannel(
+      {
+        channelId: "carnitaAsada",
+        channelName: "carnitaAsada",
+        channelDescription: "A channel to categorise your notifications",
+        playSound: true,
+        soundName: "alarm_tone", 
+        importance: PushNotification.Importance.HIGH,
+        vibrate: true,
+      }
+    );
 
-    // Configuración inicial de PushNotification
     PushNotification.configure({
       onRegister: function (token) {
         console.log("TOKEN:", token);
@@ -37,11 +35,14 @@ export const Notificationss = ({ children }) => {
       title: getTranslation('noti',0),
       message:  getTranslation('noti',1),
       playSound: true,
-      priority: "high",
-      importance: "high", 
-      soundName: 'endsesion', 
+      importance: PushNotification.Importance.HIGH,
+      soundName: "default",
+      actions: [getTranslation('noti', 4)],
       vibrate: true,
-      vibration: 600,
+      vibration: 300,
+      vibrate: true,
+      allowWhileIdle: true,
+      invokeApp: true,
     });
   };
 
@@ -51,9 +52,14 @@ export const Notificationss = ({ children }) => {
       title:  getTranslation('noti',2),
       message:  getTranslation('noti',3),
       playSound: true,
-      soundName: 'endsesion',
+      soundName: "default",
+      actions: ["Snooze", "Stop Alarm"],
       vibrate: true,
-      vibration: 600,
+      importance: PushNotification.Importance.HIGH,
+      vibrate: true,
+      vibration: 300,
+      allowWhileIdle: true,
+      invokeApp: true,
     });
   };
 

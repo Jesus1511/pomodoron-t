@@ -12,7 +12,7 @@ const { width, height } = Dimensions.get('window');
 
 export const Clock = ({setIsOpen}) => {
 
-  const { isRegistered, handleDay, timerState, sesionMaxTime, restBudgeting  } = useContext(TimerContext)
+  const { isRegistered, handleDay, timerState, sesionMaxTime, restBudgeting, tokens  } = useContext(TimerContext)
   
   return (
     <>
@@ -25,7 +25,7 @@ export const Clock = ({setIsOpen}) => {
         
         <CircleTime />
 
-        <TouchableOpacity style={styles.sesionTouchable} onPress={()=> isRegistered? handleDay():setIsOpen(true)}>
+        <TouchableOpacity style={styles.sesionTouchable} onPress={()=> {if (tokens <= 0) {alert(getTranslation("timer", 7));return}isRegistered? handleDay():setIsOpen(true)}}>
           <Image style={{width:30, height:30, marginLeft:isRegistered?0:5}} source={isRegistered ? paused : pause}/>
         </TouchableOpacity>
       </View>

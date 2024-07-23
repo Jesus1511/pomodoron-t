@@ -12,6 +12,7 @@ import arrow from '../assets/arrowLeft.png'
 import { SesionDetails } from './saved/SesionDetails.jsx';
 import { initializeLanguage } from '../hooks/useLenguage.js';
 import { Slides } from './Slides/Slides.jsx'
+import Adsense from './Adsense.jsx';
 
 const SavedComponent = () => {
 
@@ -64,6 +65,7 @@ export function Appp() {
                 <StatusBar barStyle="light-content" backgroundColor="#2a3649" />
                 <Routes>
                   <Route path='/' element={<AnimatedRoutes />} />
+                  <Route path='/adsense' element={<Adsense />} />
                   <Route path='/slides' element={<Slides />} />
                   <Route path='/saved' element={<SavedComponent />} />
                   <Route path='/hourType' element={<HourType />} />

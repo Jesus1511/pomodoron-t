@@ -26,9 +26,6 @@ export const Options = () => {
               <TouchableOpacity onPress={()=> navigator('/hourType')}>
                 <Text style={styles.textos}>{getTranslation('menu', 0)}</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={styles.textos}>{getTranslation('menu', 2)}</Text>
-              </TouchableOpacity>
               <TouchableOpacity onPress={()=>navigator('/slides')}>
                 <Text style={styles.textos}>{getTranslation('menu', 3)}</Text>
               </TouchableOpacity>

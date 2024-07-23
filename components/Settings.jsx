@@ -8,16 +8,9 @@ export const SettingsContext = createContext()
 
 export const Settings = ({children}) => {
 
-  const navigator = useNavigate()
-
   useEffect(() => {
-    firtsStartApp()
     checkPermissions();
   }, []);
-
-  async function firtsStartApp () {
-    //navigator('/slides')
-  }
 
   const checkPermissions = async () => {
     await checkNotificationPermission();

@@ -28,10 +28,12 @@ export const StartSesion = ({setOpenSesionDetails}) => {
       return
     }
     // guardar configuración de tiempo predeterminada
-    await AsyncStorage.setItem('selectedHour1', toString(selectedHour1))
-    await AsyncStorage.setItem('selectedMinute1', toString(selectedMinute1))
-    await AsyncStorage.setItem('selectedHour2', toString(selectedHour2))
-    await AsyncStorage.setItem('selectedMinute2', toString(selectedMinute2))
+    await AsyncStorage.setItem('selectedHour1', selectedHour1.toString())
+    await AsyncStorage.setItem('selectedMinute1', selectedMinute1.toString())
+    await AsyncStorage.setItem('selectedHour2', selectedHour2.toString())
+    await AsyncStorage.setItem('selectedMinute2', selectedMinute2.toString())
+
+    console.log(toString(selectedHour1))
 
     const maxTime = parseSeconds(selectedHour1, selectedMinute1)
     const restTime = parseSeconds(selectedHour2, selectedMinute2)
@@ -42,8 +44,8 @@ export const StartSesion = ({setOpenSesionDetails}) => {
     }
     setSesionMaxTime(maxTime)
     setRestBudgeting(restTime)
-    await AsyncStorage.setItem('sesionMaxTime', toString(maxTime))
-    await AsyncStorage.setItem('restBudgeting', toString(restTime))
+    await AsyncStorage.setItem('sesionMaxTime', maxTime.toString())
+    await AsyncStorage.setItem('restBudgeting', restTime.toString())
     handleDay()
     setOpenSesionDetails(false)
   } catch (e) {
@@ -52,12 +54,16 @@ export const StartSesion = ({setOpenSesionDetails}) => {
   } 
 
   useEffect(() => {
-    const {storedSelectedHour1, storedSelectedMinute1, storedSelectedHour2, storedSelectedMinute2} = useTimeConfig()
+    async function s () {
+      const {storedSelectedHour1, storedSelectedMinute1, storedSelectedHour2, storedSelectedMinute2} = await useTimeConfig()
+      
+      setSelectedHour1(parseInt(storedSelectedHour1))
+      setSelectedMinute1(parseInt(storedSelectedMinute1))
+      setSelectedHour2(parseInt(storedSelectedHour2))
+      setSelectedMinute2(parseInt(storedSelectedMinute2))
+    }
 
-    setSelectedHour1(storedSelectedHour1)
-    setSelectedMinute1(storedSelectedMinute1)
-    setSelectedHour2(storedSelectedHour2)
-    setSelectedMinute2(storedSelectedMinute2)
+    s()
   },[])
 
   return (
