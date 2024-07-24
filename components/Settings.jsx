@@ -8,6 +8,8 @@ export const SettingsContext = createContext()
 
 export const Settings = ({children}) => {
 
+  const navigator = useNavigate()
+
   useEffect(() => {
     checkPermissions();
   }, []);

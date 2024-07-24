@@ -9,11 +9,11 @@
     "icon": "./assets/logo.png",
     "extra": {
       "eas": {
-        "projectId": "87f8a030-5d72-4218-8da6-db6c4adb590a"
+        "projectId": "6fe63c55-fbc8-482e-bad8-cef58bc4dbfd"
       }
     }
   },
   "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-8412527947101695~7251095903"
+    "android_app_id": "ca-app-pub-8277191048630504~6032536516"
   }
 }

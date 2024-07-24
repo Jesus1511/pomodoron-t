@@ -10,9 +10,7 @@ import { getTranslation } from '../hooks/useLenguage';
 export const TimerContext = createContext();
 export const AdmobContext = createContext()
 
-const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-8412527947101695/9215113958';
-
-console.log()
+const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-8277191048630504/1547346654';
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   keywords: ['fitness', 'habits', 'productivity', 'selfinprovement'],
@@ -155,6 +153,9 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
 
 
   async function startSesion() {
+    const newTokens = tokens-1
+    await AsyncStorage.setItem('tokens', newTokens.toString())
+    setTokens(newTokens)
     setStartSesionDate(Date.now());
     await AsyncStorage.setItem('startSesionDate', Date.now().toString());
     setIsRegistered(true);
@@ -165,8 +166,6 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
     if (workingTime + restingTime > 0 && isRegistered) {
       await setSesion({ workingTime, restingTime, startSesionDate, finishSesionDate: Date.now() });
     }
-    await AsyncStorage.setItem('tokens', (tokens-1).toString())
-    setTokens(tokens-1)
     BackgroundTimer.stopBackgroundTimer()
     setIsRegistered(false);
     setSesionStateChanged((prev) => {return !prev})
@@ -214,7 +213,7 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
 
   return (
     <TimerContext.Provider value={contextValue}>
-      <AdmobContext.Provider value={{loaded, setLoaded}}>
+      <AdmobContext.Provider value={{loaded, setLoaded, rewarded}}>
         {children}
       </AdmobContext.Provider>
     </TimerContext.Provider>

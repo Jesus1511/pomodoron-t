@@ -9,7 +9,7 @@ import { StartSesion } from './clock/StartSesion.jsx';
 import { SesionDetails } from './saved/SesionDetails.jsx';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Banner from './Banner.jsx'
-
+import {TimerContext} from './Timer.jsx'
 
 const { width } = Dimensions.get("window");
 
@@ -18,6 +18,7 @@ export const AnimatedRoutes = () => {
   const [startingSesion, setStartingSesion] = useState(false);
   const [ sesionDetails, setSesionDetails ] = useState(null);
   const [ tokens, setTokens ] = useState(0)
+  const {isRegistered} = useContext(TimerContext)
 
   useEffect(() => {
     setiandingTokens()
@@ -26,7 +27,7 @@ export const AnimatedRoutes = () => {
     } else {
       setScrollEnabled(true)
     }
-  },[startingSesion, sesionDetails])
+  },[startingSesion, sesionDetails, isRegistered])
 
   async function setiandingTokens () {
     const storedTokens = await AsyncStorage.getItem('tokens')
