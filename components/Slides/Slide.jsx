@@ -46,5 +46,6 @@ export const Slide = ({slide}) => {
       paddingHorizontal: 20,
       marginVertical: 20,
       textAlign: "center",
+      color: "white",
     },
   })
