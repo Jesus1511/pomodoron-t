@@ -37,6 +37,7 @@ export const Slide = ({slide}) => {
 
  const styles = StyleSheet.create({
     slide: {
+      text: "white",
       width,
       flex:1,
       justifyContent:"center",

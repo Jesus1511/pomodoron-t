@@ -9,7 +9,7 @@ import { StartSesion } from './clock/StartSesion.jsx';
 import { SesionDetails } from './saved/SesionDetails.jsx';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Banner from './Banner.jsx'
-import {TimerContext} from './Timer.jsx'
+import { TimerContext } from './Timer.jsx'
 
 const { width } = Dimensions.get("window");
 
@@ -39,8 +39,8 @@ export const AnimatedRoutes = () => {
     <View style={{ flex: 1, backgroundColor: "#1a2432" }}>
       <Image source={clara} style={[styles.shadow, { top: 0, height: 400 }]} />
 
-      <View style={{}}>
-        <Text style={{textAlign:"center", width, position:"absolute", top:38}}>Tokens: {tokens}</Text>
+      <View>
+        <Text style={{textAlign:"center", color:"#ffffff99", width, position:"absolute", top:38}}>Tokens: {tokens}</Text>
       </View>
 
       <Options />

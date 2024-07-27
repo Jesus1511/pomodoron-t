@@ -3,18 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { cleanStorageState, setSesion, useStateStorage } from '../hooks/storage'
 import {SettingsContext} from './Settings'
 import BackgroundTimer from 'react-native-background-timer'
-import { useNavigate } from 'react-router-native';
-import { RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
 import { getTranslation } from '../hooks/useLenguage';
 
 export const TimerContext = createContext();
-export const AdmobContext = createContext()
-
-const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-8277191048630504/1547346654';
-
-const rewarded = RewardedAd.createForAdRequest(adUnitId, {
-  keywords: ['fitness', 'habits', 'productivity', 'selfinprovement'],
-});
 
 export const Timer = ({ children, scheduleNotificationsHandler, restEndNotifications }) => {
 
@@ -29,34 +20,8 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
   const [sesionMaxTime, setSesionMaxTime] = useState(0);
   const [restBudgeting, setRestBudgeting] = useState(0);
 
-  const [loaded, setLoaded] = useState(false);
   const [tokens, setTokens] = useState(0);
-  const navigator = useNavigate();
 
-  useEffect(() => {
-    cargarAnuncio()
-    setiandingTokens()
-  },[])
-
-  function cargarAnuncio () {
-
-    const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-      console.log("Rewarded ad loaded");
-      setLoaded(true);
-    });
-
-    const unsubscribeEarned = rewarded.addAdEventListener(RewardedAdEventType.EARNED_REWARD, async reward => {
-      await rewardUser();
-    });
-
-    console.log("Loading rewarded ad...");
-    rewarded.load()
-
-    return () => {
-      unsubscribeLoaded();
-      unsubscribeEarned();
-    };
-  }
   async function setiandingTokens () {
     const storedTokens = await AsyncStorage.getItem('tokens')
     if (storedTokens == NaN) {
@@ -67,17 +32,10 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
     setTokens(parseInt(storedTokens))
   }
 
-  const rewardUser = async () => {
-    const storedTokens = await AsyncStorage.getItem('tokens');
-    const newTokens = (parseInt(storedTokens) || 0) + 1;
-    setTokens(newTokens)
-    await AsyncStorage.setItem('tokens', newTokens.toString());
-    navigator('/');
-    setLoaded(false);
-    cargarAnuncio()
-  };
+  
 
   useEffect(() => {
+    setiandingTokens()
     async function asyncUseEffect() {
       const { storedSesionMaxTime, storedRestBudgeting, storedTimerState, storedRegistered, storedWorkingTime, storedRestingTime, startSesionDate } = await useStateStorage();
       setIsRegistered(storedRegistered);
@@ -98,7 +56,6 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
     await AsyncStorage.setItem('timerState', timerState.toString());
     await AsyncStorage.setItem('registered', isRegistered.toString());
   };
-
 
   useEffect(() => {
     if (isRegistered !== null && timerState !== null) {
@@ -153,9 +110,9 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
 
 
   async function startSesion() {
-    const newTokens = tokens-1
+    const storedTokens = AsyncStorage.getItem('tokens')
+    const newTokens = (parseInt(storedTokens) || 0) + 1;
     await AsyncStorage.setItem('tokens', newTokens.toString())
-    setTokens(newTokens)
     setStartSesionDate(Date.now());
     await AsyncStorage.setItem('startSesionDate', Date.now().toString());
     setIsRegistered(true);
@@ -213,9 +170,7 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
 
   return (
     <TimerContext.Provider value={contextValue}>
-      <AdmobContext.Provider value={{loaded, setLoaded, rewarded}}>
         {children}
-      </AdmobContext.Provider>
     </TimerContext.Provider>
   );
 };
