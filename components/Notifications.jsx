@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Platform, PermissionsAndroid, Alert } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { getTranslation } from '../hooks/useLenguage';
+import { formatTime } from '../hooks/traductor';
 
 export const Notificationss = ({ children }) => {
 
@@ -19,6 +20,17 @@ export const Notificationss = ({ children }) => {
         soundName: "alarm_tone", 
         importance: PushNotification.Importance.HIGH,
         vibrate: true,
+      }
+    );
+
+    PushNotification.createChannel(
+      {
+        channelId: "currentTimers",
+        channelName: "currentTimers",
+        channelDescription: "",
+        playSound: false, 
+        importance: PushNotification.Importance.HIGH,
+        vibrate: false,
       }
     );
 
@@ -69,6 +81,32 @@ export const Notificationss = ({ children }) => {
     });
   };
 
+  const workingTimeNotification = (workingTime) => {
+    PushNotification.localNotification({
+      id: "1234",
+      channelId: "currentTimers",
+      title: getTranslation('noti', 5),
+      message: formatTime(workingTime),
+      importance: PushNotification.Importance.HIGH,
+      allowWhileIdle: true,
+      invokeApp: true,
+      ongoing: true,
+    });
+  };
+
+  const restingTimeNotification = (restBudgeting) => {
+    PushNotification.localNotification({
+      id: "12345",
+      channelId: "currentTimers",
+      title: getTranslation('noti', 6),
+      message: formatTime(restBudgeting),
+      importance: PushNotification.Importance.HIGH,
+      allowWhileIdle: true,
+      invokeApp: true,
+      ongoing: true,
+    });
+  };
+
   const restEndNotifications = () => {
     PushNotification.localNotification({
       channelId: "carnitaAsada",
@@ -87,7 +125,7 @@ export const Notificationss = ({ children }) => {
 
   return (
     <>
-      {children({ scheduleNotificationsHandler, restEndNotifications })}
+      {children({ scheduleNotificationsHandler, restEndNotifications, workingTimeNotification, restingTimeNotification })}
     </>
   );
 };

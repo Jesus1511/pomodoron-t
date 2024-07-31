@@ -81,6 +81,7 @@ android {
 
     namespace "com.pomodoront"
     defaultConfig {
+        missingDimensionStrategy "store", "play"
         applicationId "com.pomodoront"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

@@ -12,7 +12,7 @@ const translations = {
     menu: ["language", "Get Tokens", "Leave Feedback", "App Guide", "Loading Add", "Watch Add"],
     timer: ["working time", "resting time","","", "Sesion Hours", "rest budgeting hours", "start", "get more tokens in the configuration for more sessions"],
     saveds: ["Today", "Yesterday", "More Sessions", "Started at", "Ended at", "There's still no any session"],
-    noti: ["Congratulations!! 🎉🎉", "Have Completed the Work Session.","The Resting Time is Over" ,"your working time is running out, don't let it slip away.", "Stop Alarm"],
+    noti: ["Congratulations!! 🎉🎉", "Have Completed the Work Session.","The Resting Time is Over" ,"your working time is running out, don't let it slip away.", "Stop Alarm", "🟧 Working Time progress:", "🟦 Resting Time progress:"],
     permisos: ["Exact Alarm Permission", "This app needs access to your exact alarms to function properly.","Ask Me Later","Cancel","OK", "Permission Denied","Exact alarm permission is required for this feature to work."]
   },
   es: {
@@ -24,7 +24,7 @@ const translations = {
     menu: ["lenguaje", "Obten Tokens", "Valoranos", "Guia de la App", "Cargando Anuncio", "Ver Anuncio"],
     timer: ["working time", "resting time","","", "Horas de la sesion", "Horas de descanso", "iniciar", "obten más tokens en la configuración para más sesiones"],
     saveds: ["Hoy", "Ayer", "Ver más", "Inicio en", "Termino en", "Todavia no hay ninguna sesión"],
-    noti: ["Felicidades!! 🎉🎉","Completaste la Sesion de Trabajo.","Se ah Acabado el Descanso" ,"tu tiempo productivo esta corriendo, no dejes que se te escape.", "Detener"],
+    noti: ["Felicidades!! 🎉🎉","Completaste la Sesion de Trabajo.","Se ah Acabado el Descanso" ,"tu tiempo productivo esta corriendo, no dejes que se te escape.", "Detener", "🟧 Progreso Working Time:", "🟦 Progreso Resting Time:"],
     permisos: ["Permiso de Alarma Exacta", "Esta aplicación necesita acceso a tus alarmas exactas para funcionar correctamente.", "Pregúntame Más Tarde", "Cancelar", "OK", "Permiso Denegado", "Se requiere el permiso de alarma exacta para que esta función funcione."]
   }
 };

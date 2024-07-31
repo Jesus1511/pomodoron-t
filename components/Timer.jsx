@@ -4,10 +4,11 @@ import { cleanStorageState, setSesion, useStateStorage } from '../hooks/storage'
 import {SettingsContext} from './Settings'
 import BackgroundTimer from 'react-native-background-timer'
 import { getTranslation } from '../hooks/useLenguage';
+import PushNotification from 'react-native-push-notification';
 
 export const TimerContext = createContext();
 
-export const Timer = ({ children, scheduleNotificationsHandler, restEndNotifications }) => {
+export const Timer = ({ children, scheduleNotificationsHandler, restEndNotifications, workingTimeNotification, restingTimeNotification }) => {
 
   const {setSesionStateChanged} = useContext(SettingsContext)
 
@@ -32,8 +33,6 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
     setTokens(parseInt(storedTokens))
   }
 
-  
-
   useEffect(() => {
     setiandingTokens()
     async function asyncUseEffect() {
@@ -47,7 +46,6 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
         setSesionMaxTime(storedSesionMaxTime);
         setRestBudgeting(storedRestBudgeting);
       }
-
     }
     asyncUseEffect();
   }, []);
@@ -66,13 +64,19 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
       if (timerState == 1) {
         BackgroundTimer.stopBackgroundTimer()
         BackgroundTimer.runBackgroundTimer(() => {
-          setWorkingTime(secs => secs+1)
+          PushNotification.cancelLocalNotification('12345')
+          setWorkingTime((secs) => {
+            workingTimeNotification(secs+1)
+            return secs+1})
         },1000)
       }
       else if (timerState == 2) {
         BackgroundTimer.stopBackgroundTimer()
         BackgroundTimer.runBackgroundTimer(() => {
-          setRestingTime(secs => secs+1)
+          PushNotification.cancelLocalNotification('1234')
+          setRestingTime((secs) => {
+            restingTimeNotification(restBudgeting-(secs+1))
+            return secs+1})
         },1000)
       }
     } else {BackgroundTimer.stopBackgroundTimer()}
@@ -123,6 +127,8 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
     if (workingTime + restingTime > 0 && isRegistered) {
       await setSesion({ workingTime, restingTime, startSesionDate, finishSesionDate: Date.now() });
     }
+    PushNotification.cancelLocalNotification('1234')
+    PushNotification.cancelLocalNotification('12345')
     BackgroundTimer.stopBackgroundTimer()
     setIsRegistered(false);
     setSesionStateChanged((prev) => {return !prev})

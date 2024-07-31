@@ -57,10 +57,12 @@ export function Appp() {
     <NativeRouter>
       <Settings>
         <Notificationss>
-          {({ scheduleNotificationsHandler, restEndNotifications }) => (
+          {({ scheduleNotificationsHandler, restEndNotifications, workingTimeNotification, restingTimeNotification}) => (
             <Timer
               scheduleNotificationsHandler={scheduleNotificationsHandler}
               restEndNotifications={restEndNotifications}
+              workingTimeNotification={workingTimeNotification}
+              restingTimeNotification={restingTimeNotification}
             >
                 <StatusBar barStyle="light-content" backgroundColor="#2a3649" />
                 <Routes>
