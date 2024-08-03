@@ -8,7 +8,7 @@ import clara from '../assets/sobraclara.png';
 import { StartSesion } from './clock/StartSesion.jsx';
 import { SesionDetails } from './saved/SesionDetails.jsx';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Banner from './Banner.jsx'
+import Banner from './configuracion/Banner.jsx'
 import { TimerContext } from './Timer.jsx'
 
 const { width } = Dimensions.get("window");

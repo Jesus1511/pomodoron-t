@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { TouchableOpacity, View, Text, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
-import { Navigate, useNavigate } from 'react-router-native'
+import { useNavigate } from 'react-router-native'
 import { RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
-import { getTranslation } from '../hooks/useLenguage';
+import { getTranslation } from '../../hooks/useLenguage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
@@ -63,7 +63,7 @@ const Adsense = () => {
   } else {
     return (
       <View style={{flex:1, backgroundColor:"#1a2432"}}>
-        <TouchableOpacity onPress={ () =>Navigate("/")} style={styles.shadow}>
+        <TouchableOpacity onPress={ () =>{navigator("/")}} style={styles.shadow}>
           <ActivityIndicator size="large" color="#ffffff" />
           <Text>{getTranslation('menu', 4)}</Text>
         </TouchableOpacity>

@@ -1,6 +1,5 @@
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { getTranslation } from '../../hooks/useLenguage';
-import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-native';
 
 export const Admob = () => {

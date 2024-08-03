@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
-import { Platform, PermissionsAndroid, Alert } from 'react-native';
+import { useEffect } from 'react';
 import PushNotification from 'react-native-push-notification';
 import { getTranslation } from '../hooks/useLenguage';
+import { Platform } from 'react-native';
 import { formatTime } from '../hooks/traductor';
 
 export const Notificationss = ({ children }) => {
 
   useEffect(() => {
-    if (Platform.OS === 'android' && Platform.Version >= 31) { // Android 12 (API 31) y superior
-      requestExactAlarmPermission();
-    }
 
     PushNotification.createChannel(
       {
@@ -44,26 +41,6 @@ export const Notificationss = ({ children }) => {
       requestPermissions: Platform.OS === 'ios',
     });
   }, []);
-
-  const requestExactAlarmPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.SCHEDULE_EXACT_ALARM,
-        {
-          title: getTranslation("permisos", 0),
-          message: getTranslation("permisos", 1),
-          buttonNeutral: getTranslation("permisos", 2),
-          buttonNegative: getTranslation("permisos", 3),
-          buttonPositive: getTranslation("permisos", 4)
-        }
-      );
-      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        Alert.alert(getTranslation("permisos", 5), getTranslation("permisos", 6));
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
 
   const scheduleNotificationsHandler = () => {
     PushNotification.localNotification({

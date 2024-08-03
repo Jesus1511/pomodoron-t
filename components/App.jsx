@@ -12,7 +12,7 @@ import arrow from '../assets/arrowLeft.png'
 import { SesionDetails } from './saved/SesionDetails.jsx';
 import { initializeLanguage } from '../hooks/useLenguage.js';
 import { Slides } from './Slides/Slides.jsx'
-import Adsense from './Adsense.jsx';
+import Adsense from './configuracion/Adsense.jsx';
 
 const SavedComponent = () => {
 
