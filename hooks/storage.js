@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export async function setSesion(data) {
     try {
         if (data.workingTime + data.sesionTime < 60) {
-            console.log("The session is too short and won't be saved.");
-            return;}
+            return;
+        }
         let sessions = JSON.parse(await AsyncStorage.getItem('sessions')) || [];
         sessions.unshift({ _id: sessions.length, ...data });
         sessions = sessions.map((session, index) => ({ ...session, _id: index }));

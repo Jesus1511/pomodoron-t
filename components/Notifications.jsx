@@ -42,8 +42,9 @@ export const Notificationss = ({ children }) => {
     });
   }, []);
 
-  const scheduleNotificationsHandler = () => {
-    PushNotification.localNotification({
+  const scheduleNotificationsHandler = (date) => {
+    PushNotification.localNotificationSchedule({
+      id: 1,
       channelId: "carnitaAsada",
       title: getTranslation('noti', 0),
       message: getTranslation('noti', 1),
@@ -52,6 +53,25 @@ export const Notificationss = ({ children }) => {
       soundName: "default",
       actions: [getTranslation('noti', 4)],
       vibrate: true,
+      vibration: 300,
+      date: date,
+      allowWhileIdle: true,
+      invokeApp: true,
+    });
+  };
+
+  const restEndNotifications = (date) => {
+    PushNotification.localNotificationSchedule({
+      id: 2,
+      channelId: "carnitaAsada",
+      title: getTranslation('noti', 2),
+      message: getTranslation('noti', 3),
+      playSound: true,
+      soundName: "default",
+      actions: ["Snooze", "Stop Alarm"],
+      vibrate: true,
+      date: date,
+      importance: PushNotification.Importance.HIGH,
       vibration: 300,
       allowWhileIdle: true,
       invokeApp: true,
@@ -84,21 +104,6 @@ export const Notificationss = ({ children }) => {
     });
   };
 
-  const restEndNotifications = () => {
-    PushNotification.localNotification({
-      channelId: "carnitaAsada",
-      title: getTranslation('noti', 2),
-      message: getTranslation('noti', 3),
-      playSound: true,
-      soundName: "default",
-      actions: ["Snooze", "Stop Alarm"],
-      vibrate: true,
-      importance: PushNotification.Importance.HIGH,
-      vibration: 300,
-      allowWhileIdle: true,
-      invokeApp: true,
-    });
-  };
 
   return (
     <>

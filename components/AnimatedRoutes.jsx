@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions, Image, Text } from 'react-native';
+import { StyleSheet, ScrollView, View, Dimensions, Text } from 'react-native';
 import { Clock } from './clock/Clock.jsx';
 import { Saved } from './saved/Saved.jsx';
 import { Options } from './configuracion/Options.jsx';
 import { LinearGradient } from 'expo-linear-gradient';
-import clara from '../assets/sobraclara.png';
 import { StartSesion } from './clock/StartSesion.jsx';
 import { SesionDetails } from './saved/SesionDetails.jsx';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -37,7 +36,6 @@ export const AnimatedRoutes = () => {
   return (
     <>
     <View style={{ flex: 1, backgroundColor: "#1a2432" }}>
-      <Image source={clara} style={[styles.shadow, { top: 0, height: 400 }]} />
 
       <View>
         <Text style={{textAlign:"center", color:"#ffffff99", width, position:"absolute", top:38}}>Tokens: {tokens}</Text>

@@ -1,97 +1,14 @@
 import { useState, createContext, useEffect } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import { getTranslation } from "../hooks/useLenguage";
 import { useNavigate } from "react-router-native";
+import { PermissionsAndroid } from "react-native";
 
 export const SettingsContext = createContext()
 
 export const Settings = ({children}) => {
 
   const navigator = useNavigate()
-
-  useEffect(() => {
-    checkPermissions();
-  }, []);
-
-  const checkPermissions = async () => {
-    await checkNotificationPermission();
-    await checkBootPermission();
-  };
-
-  const checkNotificationPermission = async () => {
-    try {
-      const result = await check(PERMISSIONS.ANDROID.VIBRATE);
-
-      switch (result) {
-        case RESULTS.UNAVAILABLE:
-          console.log('This feature is not available on this device/context');
-          break;
-        case RESULTS.DENIED:
-          console.log('The permission has not been requested / is denied but requestable');
-          requestNotificationPermission();
-          break;
-        case RESULTS.GRANTED:
-          console.log('The permission is granted');
-          break;
-        case RESULTS.BLOCKED:
-          console.log('The permission is denied and not requestable anymore');
-          break;
-      }
-    } catch (error) {
-      console.error('Error checking permission:', error);
-    }
-  };
-
-  const requestNotificationPermission = async () => {
-    try {
-      const result = await request(PERMISSIONS.ANDROID.VIBRATE);
-      if (result === RESULTS.GRANTED) {
-        Alert.alert('Permission Granted', 'You can now receive notifications with vibration.');
-      } else {
-        Alert.alert('Permission Denied', 'You cannot receive notifications with vibration.');
-      }
-    } catch (error) {
-      console.error('Error requesting permission:', error);
-    }
-  };
-
-  const checkBootPermission = async () => {
-    try {
-      const result = await check(PERMISSIONS.ANDROID.RECEIVE_BOOT_COMPLETED);
-
-      switch (result) {
-        case RESULTS.UNAVAILABLE:
-          console.log('This feature is not available on this device/context');
-          break;
-        case RESULTS.DENIED:
-          console.log('The permission has not been requested / is denied but requestable');
-          requestBootPermission();
-          break;
-        case RESULTS.GRANTED:
-          console.log('The permission is granted');
-          break;
-        case RESULTS.BLOCKED:
-          console.log('The permission is denied and not requestable anymore');
-          break;
-      }
-    } catch (error) {
-      console.error('Error checking permission:', error);
-    }
-  };
-
-  const requestBootPermission = async () => {
-    try {
-      const result = await request(PERMISSIONS.ANDROID.RECEIVE_BOOT_COMPLETED);
-      if (result === RESULTS.GRANTED) {
-        Alert.alert('Permission Granted', 'You can now receive boot completed events.');
-      } else {
-        Alert.alert('Permission Denied', 'You cannot receive boot completed events.');
-      }
-    } catch (error) {
-      console.error('Error requesting permission:', error);
-    }
-  };
 
     const [name1, setName1] = useState()
     const [name2, setName2] = useState()

@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { TouchableOpacity, View, Text, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import { useNavigate } from 'react-router-native'
 import { RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
 import { getTranslation } from '../../hooks/useLenguage';
+import { TimerContext } from '../Timer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
@@ -16,6 +17,7 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 const Adsense = () => {
   const [loaded, setLoaded] = useState(false);
   const navigator = useNavigate();
+  const {setTokens} = useContext(TimerContext)
 
   useEffect(() => {
     cargarAnuncio()
@@ -45,6 +47,7 @@ const Adsense = () => {
     const storedTokens = await AsyncStorage.getItem('tokens');
     const newTokens = (parseInt(storedTokens) || 0) + 1;
     await AsyncStorage.setItem('tokens', newTokens.toString());
+    setTokens(newTokens)
     navigator('/');
     setLoaded(false);
   };
@@ -65,7 +68,7 @@ const Adsense = () => {
       <View style={{flex:1, backgroundColor:"#1a2432"}}>
         <TouchableOpacity onPress={ () =>{navigator("/")}} style={styles.shadow}>
           <ActivityIndicator size="large" color="#ffffff" />
-          <Text>{getTranslation('menu', 4)}</Text>
+          <Text style={{color:"white"}}>{getTranslation('menu', 4)}</Text>
         </TouchableOpacity>
       </View>
 

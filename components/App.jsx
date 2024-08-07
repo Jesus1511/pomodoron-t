@@ -64,7 +64,7 @@ export function Appp() {
               workingTimeNotification={workingTimeNotification}
               restingTimeNotification={restingTimeNotification}
             >
-                <StatusBar barStyle="light-content" backgroundColor="#2a3649" />
+                <StatusBar barStyle="light-content" backgroundColor="#1a2432" />
                 <Routes>
                   <Route path='/' element={<AnimatedRoutes />} />
                   <Route path='/adsense' element={<Adsense />} />
