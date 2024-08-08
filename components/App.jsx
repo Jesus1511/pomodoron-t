@@ -14,6 +14,7 @@ import { initializeLanguage } from '../hooks/useLenguage.js';
 import { Slides } from './Slides/Slides.jsx'
 import Adsense from './configuracion/Adsense.jsx';
 
+
 const SavedComponent = () => {
 
   const navigate = useNavigate()

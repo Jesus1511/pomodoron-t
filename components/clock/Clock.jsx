@@ -4,6 +4,7 @@ import { TimerContext } from '../Timer.jsx';
 import { CircleTime } from './CircleTime.jsx';
 import { parseToMinutes } from '../../hooks/traductor.js';
 import { getTranslation } from '../../hooks/useLenguage.js';
+import { requestNotificationPermission } from '../../hooks/permisos.js';
 
 import pause from '../../assets/startSesion.png'
 import paused from '../../assets/endSesion.png'
@@ -25,7 +26,7 @@ export const Clock = ({setIsOpen}) => {
         
         <CircleTime />
 
-        <TouchableOpacity style={styles.sesionTouchable} onPress={()=> {if (tokens <= 0) {alert(getTranslation("timer", 7));return}isRegistered? handleDay():setIsOpen(true)}}>
+        <TouchableOpacity style={styles.sesionTouchable} onPress={()=> {requestNotificationPermission();if (tokens <= 0) {alert(getTranslation("timer", 7));return}isRegistered? handleDay():setIsOpen(true)}}>
           <Image style={{width:30, height:30, marginLeft:isRegistered?0:5}} source={isRegistered ? paused : pause}/>
         </TouchableOpacity>
       </View>
