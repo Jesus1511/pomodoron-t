@@ -51,7 +51,6 @@ export const Notificationss = ({ children }) => {
       playSound: true,
       importance: PushNotification.Importance.HIGH,
       soundName: "default",
-      actions: [getTranslation('noti', 4)],
       vibrate: true,
       vibration: 300,
       date: date,

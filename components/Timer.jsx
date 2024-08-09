@@ -61,6 +61,8 @@ export const Timer = ({ children, scheduleNotificationsHandler, restEndNotificat
         const milliseconds = Date.now();
         const seconds = Math.floor(milliseconds / 1000);
         await AsyncStorage.setItem('outDate',seconds.toString())
+        await AsyncStorage.setItem('workingTime', workingTime.toString());
+        await AsyncStorage.setItem('restingTime', restingTime.toString());
       }
       setAppState(nextAppState);
     };

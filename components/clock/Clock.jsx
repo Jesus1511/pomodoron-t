@@ -4,7 +4,7 @@ import { TimerContext } from '../Timer.jsx';
 import { CircleTime } from './CircleTime.jsx';
 import { parseToMinutes } from '../../hooks/traductor.js';
 import { getTranslation } from '../../hooks/useLenguage.js';
-import { requestNotificationPermission } from '../../hooks/permisos.js';
+import { requestNotificationPermission, requestExactAlarmPermission } from '../../hooks/permisos.js';
 
 import pause from '../../assets/startSesion.png'
 import paused from '../../assets/endSesion.png'
@@ -15,6 +15,17 @@ export const Clock = ({setIsOpen}) => {
 
   const { isRegistered, handleDay, timerState, sesionMaxTime, restBudgeting, tokens  } = useContext(TimerContext)
   
+  function startTimer () {
+    requestNotificationPermission();
+    if (tokens <= 0) {
+      alert(getTranslation("timer", 7));return
+    };
+
+    if (requestExactAlarmPermission()) {
+      isRegistered? handleDay():setIsOpen(true)
+    }
+  }
+
   return (
     <>
     <View style={styles.absolute}>
@@ -26,7 +37,7 @@ export const Clock = ({setIsOpen}) => {
         
         <CircleTime />
 
-        <TouchableOpacity style={styles.sesionTouchable} onPress={()=> {requestNotificationPermission();if (tokens <= 0) {alert(getTranslation("timer", 7));return}isRegistered? handleDay():setIsOpen(true)}}>
+        <TouchableOpacity style={styles.sesionTouchable} onPress={()=> {startTimer()}}>
           <Image style={{width:30, height:30, marginLeft:isRegistered?0:5}} source={isRegistered ? paused : pause}/>
         </TouchableOpacity>
       </View>
